@@ -33,6 +33,7 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
                 isOpen={openModal}
                 wallets={wallets}
                 login={login}
+                onClose={() => {setOpenModal(false)}}
             />
         </>
     )
