@@ -1,12 +1,11 @@
 "use client"
 
 import { FC, ReactNode, useMemo, useState } from "react";
-import { ConnectWalletModal } from "./ConnectWalletModal";
-import { createWallets } from "@/app/_config/wallet";
 import { useAccount, useConnect } from "wagmi";
 import { bsc } from "viem/chains";
-import { WalletConfigV2 } from "@/app/_types/walletConnect";
-import useAuth from "@/app/_hooks/useAuth";
+import { ConnectWalletModal } from "../connect-wallet-modal/ConnectWalletModal";
+import { createWallets } from "../../lib/config/wallet";
+import useAuth from "../../lib/hooks/useAuth";
 
 type TConnectWalletButtonProps = {
     children: ReactNode,

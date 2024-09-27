@@ -1,9 +1,9 @@
 import { Config } from "wagmi"
 import { ConnectMutateAsync } from "wagmi/query"
-import { ASSET_CDN } from "./constants/endpoints"
-import { WalletFilledIcon } from "./icons"
-import { WalletConfigV2 } from "../_types/walletConnect"
-import { createWagmiConfig, walletConnectNoQrCodeConnector } from "../_providers/wc"
+import { ASSET_CDN } from "../constants/endpoints"
+import { WalletFilledIcon } from "../../assets/icons"
+import { WalletConfigV2 } from "../../types/walletConnect"
+import { createWagmiConfig, walletConnectNoQrCodeConnector } from "./wc"
 import { bsc, mainnet, polygon } from "viem/chains"
 
 

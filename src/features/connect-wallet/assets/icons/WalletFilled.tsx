@@ -1,5 +1,5 @@
-import { SvgProps } from "@/app/_types/walletConnect";
 import React from "react";
+import { SvgProps } from "../../types/walletConnect";
 
 
 const Icon: React.FC<React.PropsWithChildren<SvgProps>> = (props) => {

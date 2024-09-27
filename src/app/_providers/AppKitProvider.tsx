@@ -1,3 +1,4 @@
+'use client'
 import { createAppKit } from '@reown/appkit/react'
 
 import { CreateConnectorFn, WagmiProvider } from 'wagmi'
@@ -6,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { ReactNode } from 'react'
 import { coinbaseWallet, injected, walletConnect } from 'wagmi/connectors'
-import { createWagmiConfig, MetaMaxConnect } from './wc'
+import { createWagmiConfig, MetaMaxConnect } from '../../features/connect-wallet/lib/config/wc'
 
 // 0. Setup queryClient
 const queryClient = new QueryClient()
@@ -22,15 +23,15 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
 
-const connectors: CreateConnectorFn[] = []
-connectors.push(walletConnect({ projectId, metadata, showQrModal: false })) // showQrModal must be false
-connectors.push(injected({ shimDisconnect: true }))
-connectors.push(
-  coinbaseWallet({
-    appName: metadata.name,
-    appLogoUrl: metadata.icons[0]
-  })
-)
+// const connectors: CreateConnectorFn[] = []
+// connectors.push(walletConnect({ projectId, metadata, showQrModal: false })) // showQrModal must be false
+// connectors.push(injected({ shimDisconnect: true }))
+// connectors.push(
+//   coinbaseWallet({
+//     appName: metadata.name,
+//     appLogoUrl: metadata.icons[0]
+//   })
+// )
 
 export const networks = [mainnet, binanceSmartChain]
 

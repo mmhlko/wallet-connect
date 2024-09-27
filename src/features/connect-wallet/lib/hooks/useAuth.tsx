@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { ConnectorNotFoundError, SwitchChainNotSupportedError, useAccount, useConnect, /* useDisconnect */ } from 'wagmi'
-import { ConnectorNames } from '../_config/wallet'
+import { ConnectorNames } from '../config/wallet'
 
 
 const useAuth = () => {

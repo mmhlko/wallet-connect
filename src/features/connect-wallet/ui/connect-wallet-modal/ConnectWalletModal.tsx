@@ -1,8 +1,9 @@
-import { ConnectorNames } from "@/app/_config/wallet"
-import { WalletConfigV2 } from "@/app/_types/walletConnect"
+
 import { classNames } from "@/shared/lib/helpers/classNames"
-import { FC, MouseEvent, MouseEventHandler } from "react"
-import { WalletSelect } from "./WalletSelect"
+import { FC, MouseEventHandler } from "react"
+import { WalletSelector } from "../wallet-selector/WalletSelect"
+import { ConnectorNames } from "../../lib/config/wallet"
+import { WalletConfigV2 } from "../../types/walletConnect"
 
 type TConnectWalletModalProps = {
     isOpen: boolean,
@@ -72,7 +73,7 @@ export const ConnectWalletModal: FC<TConnectWalletModalProps> = ({ isOpen, walle
             >
                 <h2 className="text-center mb-2">Connect Wallet</h2>
                 <p className="text-white/50 mb-4 text-sm">Start by connecting with one of the wallets below. Be sure to store your private keys or seed phrase securely. Never share them with anyone.</p>
-                <WalletSelect
+                <WalletSelector
                     wallets={wallets}
                     onClick={(wallet) => {
                         connectWallet(wallet)

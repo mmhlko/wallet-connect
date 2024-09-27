@@ -1,16 +1,15 @@
-import { ConnectorNames } from "@/app/_config/wallet"
-import { WalletConfigV2 } from "@/app/_types/walletConnect"
 import { classNames } from "@/shared/lib/helpers/classNames"
 import { useAppKit } from "@reown/appkit/react"
 import { useTonConnectUI } from "@tonconnect/ui-react"
 import { FC, useState } from "react"
-import { useConnect } from "wagmi"
+import { ConnectorNames } from "../../lib/config/wallet"
+import { WalletConfigV2 } from "../../types/walletConnect"
 type TWalletSelectProps = {
     wallets: WalletConfigV2<ConnectorNames>[],
     onClick: (wallet: WalletConfigV2<ConnectorNames>) => void,
     displayCount?: number,
 }
-export const WalletSelect: FC<TWalletSelectProps> = ({
+export const WalletSelector: FC<TWalletSelectProps> = ({
     wallets,
     onClick,
     displayCount = 9,
@@ -22,8 +21,8 @@ export const WalletSelect: FC<TWalletSelectProps> = ({
     const { open } = useAppKit();
     return (
         <div className="flex flex-col gap-4">
-            <button className="w-full bg-blue-500 h-[50px] rounded-2xl" onClick={() => { tonConnectUI.openModal() }}>TON Connect</button>
-            <button className="w-full bg-blue-500 h-[50px] rounded-2xl" onClick={() => { open() }}>Wallet Connect</button>
+            <button className="w-full bg-blue-500 h-[50px] rounded-2xl relative active:top-[1px]" onClick={() => { tonConnectUI.openModal() }}>TON Connect</button>
+            <button className="w-full bg-blue-500 h-[50px] rounded-2xl relative active:top-[1px]" onClick={() => { open() }}>Wallet Connect</button>
             <div className="grid grid-cols-4 place-items-center">
             {walletsToShow.map((wallet) => {
                 const isImage = typeof wallet.icon === 'string'
