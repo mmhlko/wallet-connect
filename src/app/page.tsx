@@ -1,101 +1,48 @@
-import Image from "next/image";
+"use client"
+import { TonConnectButton } from "@tonconnect/ui-react";
+import { AppKitProvider } from "./_providers/AppKitProvider";
+import { TonConnectProvider } from "./_providers/TonConnectProvider";
+import { ConnectWalletButton } from "@/entities/connect-button/ConnectWalletButton";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const domainName = "t.me/SmartFactoryTMA_Bot/app"// || "8924-195-239-51-199.ngrok-free.app"
+  const metamask = `dapp://${domainName}`
+  const trustwallet = `https://link.trustwallet.com/open_url?coin_id=60&url=${domainName}`
+  const wc = "wc:2f38d1477f989f32742a9cb8c8f652a1cc6ce45c801b37f0c9cd3c17032f2818@2?expiryTimestamp=1727268450&relay-protocol=irn&symKey=1cd57fe54d8735ff8784fe4e68c93f7cc78a0389f6cd524dfe959aaacf9ee3f9"
+  const redirect = (link: string) => {
+    try {
+      window.open(link, "_blank")
+      console.log(window.location);
+    } catch (error) {
+      alert(error)
+    }
+  }
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const openMetamaskApp = () => {
+    const walletConnectLink = "2c3ba4d9231007f331d3c5247bd53770e9cb182c3ebf7c2d1c98acc270354077@2?expiryTimestamp=1727276707&relay-protocol=irn&symKey=4ac59c18a78679daefc378dcee6dcf80c0808df18448a67ce01c3f4c20213ab7";
+    //const targetLink = `https://metamask.app.link/dapp/${domainName}`;
+// the target links only support https
+    const webApp = window.Telegram.WebApp
+    //window.open(`metamask://wc?uri=${walletConnectLink}`, "_blank")
+    //webApp.openLink(`metamask://wc?uri=${walletConnectLink}`, {try_instant_view: true})
+    window.open("https://metamask.app.link/send/0x165b2FBa89335E90baa9Eb59b399b1a30771c53e@1/transfer?address=0x165b2FBa89335E90baa9Eb59b399b1a30771c53e&uint256=1e18")
+  }
+  return (
+    <AppKitProvider>
+      <TonConnectProvider>
+      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+        <header>
+          <ConnectWalletButton>Connect Wallet</ConnectWalletButton>
+        </header>
+        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+          <TonConnectButton />
+          <w3m-button />
+          <button onClick={() => redirect(wc)}>WC</button>
+          <button onClick={openMetamaskApp}>metamask</button>
+          <button onClick={() => redirect(trustwallet)}>trustwallet</button>
+        </main>
+      </div>
+      </TonConnectProvider>
+    </AppKitProvider>
   );
 }
