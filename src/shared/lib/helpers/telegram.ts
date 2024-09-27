@@ -12,6 +12,9 @@ export const isTelegramWebAppFn = (): boolean => {
     return false
 };
 export const getTelegramPlatform = () => {
+    if (typeof window === 'undefined') {
+        return "none"
+    }
     if (window.Telegram !== undefined
         && window.Telegram.WebApp !== undefined
         && window.Telegram.WebApp?.platform !== "unknown"
