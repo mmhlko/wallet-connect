@@ -15,9 +15,10 @@ export const ConnectWalletModal: FC<TConnectWalletModalProps> = ({ isOpen, walle
     const connectWallet = (wallet: WalletConfigV2<ConnectorNames>) => {
         //setSelected(wallet)
         //setError('')
-        console.log(wallet);
+        
         
         if (wallet.installed !== false) {
+            console.log(wallet);
            login(wallet.connectorId)
         //     .then((v) => {
         //       if (v) {
@@ -44,7 +45,7 @@ export const ConnectWalletModal: FC<TConnectWalletModalProps> = ({ isOpen, walle
     return (
         <div className={classNames(
             isOpen ? "opacity-100 visible" : "opacity-0 invisible",
-            "z-10 bg-slate-100/5 fixed inset-0 opacity-15",
+            "z-10 bg-slate-100/5 fixed inset-0",
             "transition-all duration-300 ease-in"
         )}>
             <div className={classNames(

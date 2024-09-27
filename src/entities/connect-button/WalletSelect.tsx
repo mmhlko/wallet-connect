@@ -15,7 +15,6 @@ export const WalletSelect: FC<TWalletSelectProps> = ({
     const [showMore, setShowMore] = useState(false)
     const walletDisplayCount = wallets.length > displayCount ? displayCount - 1 : displayCount
     const walletsToShow = showMore ? wallets : wallets.slice(0, walletDisplayCount)
-    console.log(wallets);
 
     return (
         <div className="grid grid-cols-4">
