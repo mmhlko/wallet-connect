@@ -1,10 +1,11 @@
 "use client"
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
 import { AppKitProvider } from "./_providers/AppKitProvider";
 import { TonConnectProvider } from "./_providers/TonConnectProvider";
 import { ConnectWalletButton } from "@/entities/connect-button/ConnectWalletButton";
 
 export default function Home() {
+  
   const domainName = "t.me/SmartFactoryTMA_Bot/app"// || "8924-195-239-51-199.ngrok-free.app"
   const metamask = `dapp://${domainName}`
   const trustwallet = `https://link.trustwallet.com/open_url?coin_id=60&url=${domainName}`

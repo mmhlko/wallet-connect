@@ -15,10 +15,15 @@ const useAuth = () => {
     async (connectorID: ConnectorNames) => {
       const findConnector = connectors.find((c) => c.id === connectorID)
       try {
+        console.log(findConnector);
+        
         if (!findConnector) return undefined
-
+        console.log("connected", chainId);
         const connected = await connectAsync({ connector: findConnector, chainId })
+        
+        
         if (connected.chainId !== chainId) {
+
           //replaceBrowserHistory('chain', CHAIN_QUERY_NAME[connected.chainId])
           //setSessionChainId(connected.chainId)
         }
