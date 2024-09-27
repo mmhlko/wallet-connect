@@ -3,6 +3,8 @@ import { ConnectMutateAsync } from "wagmi/query"
 import { ASSET_CDN } from "./constants/endpoints"
 import { WalletFilledIcon } from "./icons"
 import { WalletConfigV2 } from "../_types/walletConnect"
+import { createWagmiConfig, walletConnectNoQrCodeConnector } from "../_providers/wc"
+import { bsc, mainnet, polygon } from "viem/chains"
 
 
 export enum ConnectorNames {
@@ -30,7 +32,7 @@ const createQrCode =
     // HACK: utilizing event emitter from injected connector to notify wagmi of the connect events
     const connector = {
       ...walletConnectNoQrCodeConnector({
-        chains,
+        chains: [bsc, polygon, mainnet],
         emitter: injectedConnector?.emitter,
       }),
       emitter: injectedConnector.emitter,

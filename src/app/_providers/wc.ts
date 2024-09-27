@@ -114,7 +114,10 @@ export const walletConnectConnector = walletConnect({
     showQrModal: true,
     projectId,
 })
-
+export const walletConnectNoQrCodeConnector = walletConnect({
+    showQrModal: false,
+    projectId: projectId,
+  })
 export const metaMaskConnector = injected({ target: 'metaMask', shimDisconnect: false })
 export const trustConnector = injected({ target: 'trust', shimDisconnect: false })
 export const injectedConnector = injected({ shimDisconnect: false })
