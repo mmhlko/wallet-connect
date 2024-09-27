@@ -65,7 +65,7 @@ export const ConnectWalletModal: FC<TConnectWalletModalProps> = ({ isOpen, walle
                     isOpen ? "translate-y-0" : "translate-y-full",
                     "fixed bottom-0 left-0 right-0 z-10",
                     "h-[350px]",
-                    "bg-[#212121]",
+                    "bg-background",
                     "rounded-t-3xl pt-4 px-5",
                     "transition-all duration-200 ease-in",
                 )}

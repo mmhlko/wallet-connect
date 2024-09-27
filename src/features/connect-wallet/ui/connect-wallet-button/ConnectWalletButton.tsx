@@ -24,7 +24,7 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
         <>
             <button
                 onClick={() => {setOpenModal(!openModal)}}
-                className="relative z-20 px-3 py-2 bg-indigo-400 rounded-lg font-bold active:relative top-[1px]"
+                className="relative z-20 px-3 py-2 bg-indigo-400 rounded-lg font-bold active:relative top-[1px] text-white"
             >
                 {children}
             </button>
