@@ -19,8 +19,8 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
     const [ tonConnectUI ] = useTonConnectUI();
     const { connectAsync } = useConnect()
     const { login } = useAuth()
-    const isWalletConnected = isConnected || tonConnectUI.connected
-    const walletAddress = address || tonConnectUI.wallet?.account.address
+    const isWalletConnected = isConnected || tonConnectUI?.connected
+    const walletAddress = address || tonConnectUI?.wallet?.account?.address
 
     const wallets = useMemo(() => createWallets(chainId || bsc.id, connectAsync), [chainId, connectAsync])
     const handleClickConnectWallet = () => {
@@ -35,7 +35,7 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
             >
                 {children}
             </button>
-            {isConnected && walletAddress && (
+            {isWalletConnected && walletAddress && (
                 <h2>{walletAddress.slice(-4)}</h2>
             )}
             <ConnectWalletModal
