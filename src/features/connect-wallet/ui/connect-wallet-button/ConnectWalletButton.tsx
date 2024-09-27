@@ -6,7 +6,7 @@ import { bsc } from "viem/chains";
 import { ConnectWalletModal } from "../connect-wallet-modal/ConnectWalletModal";
 import { createWallets } from "../../lib/config/wallet";
 import useAuth from "../../lib/hooks/useAuth";
-import { isTelegramWebApp, telegramPlatform } from "@/shared/lib/helpers/platform";
+import { getTelegramPlatform } from "@/shared/lib/helpers/telegram";
 
 type TConnectWalletButtonProps = {
     children: ReactNode,
@@ -22,7 +22,7 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
     const wallets = useMemo(() => createWallets(chainId || bsc.id, connectAsync), [chainId, connectAsync])
     const handleClickConnectWallet = () => {
         setOpenModal(!openModal)
-        alert(telegramPlatform)
+        alert(getTelegramPlatform())
     }
 
     return (

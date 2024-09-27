@@ -15,13 +15,14 @@ export const getTelegramPlatform = () => {
     if (typeof window === 'undefined') {
         return "none"
     }
-    if (window.Telegram !== undefined
+    if (
+        window.Telegram !== undefined
         && window.Telegram.WebApp !== undefined
         && window.Telegram.WebApp?.platform !== "unknown"
     ) {
         return window.Telegram.WebApp?.platform
     }
-    return "unknown"
+    return "none"
 }
 // if (isTelegramWebAppCheck()) {
 //     console.log("Сайт открыт через Telegram Web App");
