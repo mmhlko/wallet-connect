@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 export const TonConnectProvider = ({ children }: { children:ReactNode }) => {
     return (
         <>
-        <TonConnectUIProvider manifestUrl="https://eea3-195-239-51-199.ngrok-free.app/tonconnect-manifest.json">
+        <TonConnectUIProvider manifestUrl="https://unique-cactus-04f1d3.netlify.app/tonconnect-manifest.json">
             { children }
         </TonConnectUIProvider>
         </>
