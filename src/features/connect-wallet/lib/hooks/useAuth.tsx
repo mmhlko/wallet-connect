@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
-import { ConnectorNotFoundError, SwitchChainNotSupportedError, useAccount, useConnect, /* useDisconnect */ } from 'wagmi'
+import { ConnectorNotFoundError, SwitchChainNotSupportedError, useAccount, useConnect, useDisconnect, /* useDisconnect */ } from 'wagmi'
 import { ConnectorNames } from '../config/wallet'
 
 
 const useAuth = () => {
   const { connectAsync, connectors } = useConnect()
-  //const { chain } = useAccount()
-  //const { disconnectAsync } = useDisconnect()
+  const { chain } = useAccount()
+  const { disconnectAsync } = useDisconnect()
   //const { chainId } = useActiveChainId()
   const { chainId } = useAccount()
   //const [, setSessionChainId] = useSessionChainId()
@@ -15,15 +15,10 @@ const useAuth = () => {
     async (connectorID: ConnectorNames) => {
       const findConnector = connectors.find((c) => c.id === connectorID)
       try {
-        console.log(findConnector);
-        
         if (!findConnector) return undefined
-        console.log("connected", chainId);
-        const connected = await connectAsync({ connector: findConnector, chainId })
-        
-        
-        if (connected.chainId !== chainId) {
 
+        const connected = await connectAsync({ connector: findConnector, chainId })
+        if (connected.chainId !== chainId) {
           //replaceBrowserHistory('chain', CHAIN_QUERY_NAME[connected.chainId])
           //setSessionChainId(connected.chainId)
         }
@@ -45,17 +40,18 @@ const useAuth = () => {
     [connectors, connectAsync, chainId],
   )
 
-  // const logout = useCallback(async () => {
-  //   try {
-  //     await disconnectAsync()
-  //   } catch (error) {
-  //     console.error(error)
-  //   } finally {
-  //     clearUserStates(dispatch, { chainId: chain?.id })
-  //   }
-  // }, [disconnectAsync, dispatch, chain?.id])
+  const logout = useCallback(async () => {
+    try {
+      await disconnectAsync()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      console.log("wallet logout");
+      //clearUserStates(dispatch, { chainId: chain?.id })
+    }
+  }, [disconnectAsync, chain?.id])
 
-  return { login }
+  return { login, logout }
 }
 
 export default useAuth

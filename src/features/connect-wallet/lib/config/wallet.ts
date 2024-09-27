@@ -23,36 +23,35 @@ export enum ConnectorNames {
 
 const createQrCode =
   <config extends Config = Config, context = unknown>(chainId: number, connect: ConnectMutateAsync<config, context>) =>
-  async () => {
-    const wagmiConfig = createWagmiConfig()
-    const injectedConnector = wagmiConfig.connectors.find((connector) => connector.id === ConnectorNames.Injected)
-    if (!injectedConnector) {
-      return ''
-    }
-    // HACK: utilizing event emitter from injected connector to notify wagmi of the connect events
-    const connector = {
-      ...walletConnectNoQrCodeConnector({
-        chains: [bsc, polygon, mainnet],
-        emitter: injectedConnector?.emitter,
-      }),
-      emitter: injectedConnector.emitter,
-      uid: injectedConnector.uid,
-    }
-    const provider = await connector.getProvider()
+    async () => {
+      const wagmiConfig = createWagmiConfig()
+      const injectedConnector = wagmiConfig.connectors.find((connector) => connector.id === ConnectorNames.Injected)
+      if (!injectedConnector) {
+        return ''
+      }
+      // HACK: utilizing event emitter from injected connector to notify wagmi of the connect events
+      const connector = {
+        ...walletConnectNoQrCodeConnector({
+          chains: [bsc, polygon, mainnet],
+          emitter: injectedConnector?.emitter,
+        }),
+        emitter: injectedConnector.emitter,
+        uid: injectedConnector.uid,
+      }
+      const provider = await connector.getProvider()
 
-    return new Promise<string>((resolve) => {
-      provider.on('display_uri', (uri) => {
-        resolve(uri)
+      return new Promise<string>((resolve) => {
+        provider.on('display_uri', (uri) => {
+          resolve(uri)
+        })
+        connect({ connector, chainId })
       })
-      connect({ connector, chainId })
-    })
-  }
+    }
 
 const isMetamaskInstalled = () => {
   if (typeof window === 'undefined') {
     return false
   }
-
   if (window.ethereum?.isMetaMask) {
     return true
   }
@@ -126,13 +125,13 @@ export const createWallets = <config extends Config = Config, context = unknown>
   return hasInjected && config.some((c) => c.installed && c.connectorId === ConnectorNames.Injected)
     ? config // add injected icon if none of injected type wallets installed
     : [
-        ...config,
-        {
-          id: 'injected',
-          title: 'Injected',
-          icon: WalletFilledIcon,
-          connectorId: ConnectorNames.Injected,
-          installed: typeof window !== 'undefined' && Boolean(window.ethereum),
-        },
-      ]
+      ...config,
+      {
+        id: 'injected',
+        title: 'Injected',
+        icon: WalletFilledIcon,
+        connectorId: ConnectorNames.Injected,
+        installed: typeof window !== 'undefined' && Boolean(window.ethereum),
+      },
+    ]
 }

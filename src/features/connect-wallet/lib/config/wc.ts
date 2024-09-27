@@ -8,20 +8,20 @@ export const projectId = "c6281576f0219712a95548a00016466d"
 export const isMobile: boolean | undefined =
     typeof navigator !== 'undefined' ? /iPhone|iPad|iPod|Android|Mobi/i.test(navigator.userAgent) : undefined
 
-export const WC_PARAMS = {
-    projectId,
-    metadata: {
-        name: 'Uniswap',
-        description: 'Uniswap Interface',
-        url: 'https://app.uniswap.org',
-        icons: ['https://app.uniswap.org/favicon.png'],
-    },
-    qrModalOptions: {
-        themeVariables: {
-            '--wcm-font-family': '"Inter custom", sans-serif',
-        },
-    },
-}
+// export const WC_PARAMS = {
+//     projectId,
+//     metadata: {
+//         name: 'Uniswap',
+//         description: 'Uniswap Interface',
+//         url: 'https://app.uniswap.org',
+//         icons: ['https://app.uniswap.org/favicon.png'],
+//     },
+//     qrModalOptions: {
+//         themeVariables: {
+//             '--wcm-font-family': '"Inter custom", sans-serif',
+//         },
+//     },
+// }
 
 export const WC_PARAMS_Max = {
     projectId,
@@ -38,36 +38,36 @@ export const WC_PARAMS_Max = {
     },
 }
 
-export function uniswapWalletConnect() {
-    return createConnector((config) => {
-        const wc = walletConnect({
-            ...WC_PARAMS,
-            showQrModal: false,
-        })(config)
-        config.emitter.on('message', ({ type, data }) => {
-            if (type === 'display_uri') {
-                // Emits custom wallet connect code, parseable by the Uniswap Wallet
-                const uniswapWalletUri = `https://uniswap.org/app/wc?uri=${data}`
-                config.emitter.emit('message', { type: 'display_uniswap_uri', data: uniswapWalletUri })
+// export function uniswapWalletConnect() {
+//     return createConnector((config) => {
+//         const wc = walletConnect({
+//             ...WC_PARAMS,
+//             showQrModal: false,
+//         })(config)
+//         config.emitter.on('message', ({ type, data }) => {
+//             if (type === 'display_uri') {
+//                 // Emits custom wallet connect code, parseable by the Uniswap Wallet
+//                 const uniswapWalletUri = `https://uniswap.org/app/wc?uri=${data}`
+//                 config.emitter.emit('message', { type: 'display_uniswap_uri', data: uniswapWalletUri })
 
-                // Opens deeplink to Uniswap Wallet if on mobile
-                if (true) {
-                    // Using window.location.href to open the deep link ensures smooth navigation and leverages OS handling for installed apps,
-                    // avoiding potential popup blockers or inconsistent behavior associated with window.open
-                    window.location.href = `uniswap://wc?uri=${encodeURIComponent(data as string)}`
-                }
-            }
-        })
+//                 // Opens deeplink to Uniswap Wallet if on mobile
+//                 if (true) {
+//                     // Using window.location.href to open the deep link ensures smooth navigation and leverages OS handling for installed apps,
+//                     // avoiding potential popup blockers or inconsistent behavior associated with window.open
+//                     window.location.href = `uniswap://wc?uri=${encodeURIComponent(data as string)}`
+//                 }
+//             }
+//         })
 
-        return {
-            ...wc,
-            id: 'uniswapWalletConnect',
-            type: 'uniswapWalletConnect',
-            name: 'Uniswap Wallet Max',
-            icon: 'https://app.uniswap.org/favicon.png',
-        }
-    })
-}
+//         return {
+//             ...wc,
+//             id: 'uniswapWalletConnect',
+//             type: 'uniswapWalletConnect',
+//             name: 'Uniswap Wallet Max',
+//             icon: 'https://app.uniswap.org/favicon.png',
+//         }
+//     })
+// }
 
 export function MetaMaxConnect() {
     return createConnector((config) => {
@@ -116,7 +116,7 @@ export const walletConnectConnector = walletConnect({
 })
 export const walletConnectNoQrCodeConnector = walletConnect({
     showQrModal: false,
-    projectId: projectId,
+    projectId,
   })
 export const metaMaskConnector = injected({ target: 'metaMask', shimDisconnect: false })
 export const trustConnector = injected({ target: 'trust', shimDisconnect: false })
