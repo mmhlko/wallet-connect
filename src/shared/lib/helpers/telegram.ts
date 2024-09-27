@@ -11,7 +11,8 @@ export const isTelegramWebAppFn = (): boolean => {
     }
     return false
 };
-export const getTelegramPlatform = () => {
+type TTelegramPlatform = "ios" | "tdesktop" | "unknown" | string;
+export const getTelegramPlatform = ():TTelegramPlatform => {
     if (typeof window === 'undefined') {
         return "none"
     }
