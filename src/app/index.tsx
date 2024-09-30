@@ -10,7 +10,7 @@ export const App: FC<{
       <>
         <header className="py-6">
           <div className="flex justify-end px-4">
-            <div><ConnectWalletButton>Connect Wallet</ConnectWalletButton></div>
+            <div><w3m-button /></div>
           </div>
         </header>
         <main>
