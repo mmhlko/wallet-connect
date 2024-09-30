@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, MouseEventHandler, ReactNode, useMemo, useState } from "react";
+import { FC, MouseEventHandler, ReactNode, useEffect, useMemo, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { bsc } from "viem/chains";
 import { ConnectWalletModal } from "../connect-wallet-modal/ConnectWalletModal";
@@ -18,12 +18,12 @@ type TConnectWalletButtonProps = {
 export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) => {
     const [openModal, setOpenModal] = useState(false);
     const [openWallet, setOpenWallet] = useState(false);
+    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [walletAddress, setWalletAddress] = useState<string>()
     const { chainId, isConnected, address } = useAccount();
     const [ tonConnectUI ] = useTonConnectUI();
     const { connectAsync } = useConnect();
     const { login } = useAuth();
-    const isWalletConnected = isConnected || tonConnectUI?.connected;
-    const walletAddress = address || tonConnectUI?.wallet?.account?.address;
     const { disconnectAsync, isPending:isDisconnecting } = useDisconnect()
 
     const wallets = useMemo(() => createWallets(chainId || bsc.id, connectAsync), [chainId, connectAsync]);
@@ -56,6 +56,11 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
                 })
         }
     }
+
+    useEffect(() => {
+        setIsWalletConnected(isConnected || tonConnectUI?.connected)
+        setWalletAddress(address || tonConnectUI?.wallet?.account?.address)
+    }, [address, isConnected, tonConnectUI?.connected, tonConnectUI?.wallet?.account?.address])
 
     return (
         <div>
