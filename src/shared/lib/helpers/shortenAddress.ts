@@ -1,6 +1,5 @@
-import { TAddress } from "@/shared/types";
 
-export function shortenedAddress(address?: TAddress) {
+export function shortenedAddress(address?: string) {
     if (address) {
         // Проверяем длину адреса
         if (address.length <= 8) {
