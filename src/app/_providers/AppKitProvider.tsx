@@ -33,7 +33,7 @@ const metadata = {
 //   })
 // )
 
-export const networks = [mainnet, binanceSmartChain, polygon, base]
+export const networks = [mainnet, polygon, base]
 
 // 3. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({

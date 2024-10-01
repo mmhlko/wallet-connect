@@ -14,7 +14,9 @@ export const App: FC<{
               <w3m-button
                 label="Connect wallet"
                 balance="show"
-                loadingLabel="Connecting..." />
+                loadingLabel="Connecting..." 
+              />
+              <ConnectWalletButton>Connect</ConnectWalletButton>
             </div>
           </div>
         </header>
