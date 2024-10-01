@@ -65,11 +65,11 @@ createAppKit({
   ],
 })
 
-//export const wagmiConfig2= createWagmiConfig()
+export const wagmiConfig2= createWagmiConfig()
 
 export function AppKitProvider({ children, initialState }: { children:ReactNode, initialState?: State }) {
   return (
-    <WagmiProvider config={wagmiAdapter.wagmiConfig} initialState={initialState}>
+    <WagmiProvider config={wagmiConfig2} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
