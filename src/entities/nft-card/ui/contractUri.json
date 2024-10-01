@@ -1,0 +1,10 @@
+{
+    "name": "Cyborg Collection",
+    "description": "Cyborg Description\n\nMade with [NFTs2Me.com](https://nfts2me.com/)",
+    "image": "https://nftstorage.link/ipfs/QmXwJVgFmvFswUJ5265cr5oAXTjzwvrSgTjHFmRAS3MxSz/logo.gif",
+    "banner_image": "https://nftstorage.link/ipfs/QmXwJVgFmvFswUJ5265cr5oAXTjzwvrSgTjHFmRAS3MxSz/banner.webp",
+    "featured_image": "https://nftstorage.link/ipfs/QmXwJVgFmvFswUJ5265cr5oAXTjzwvrSgTjHFmRAS3MxSz/featured.webp",
+    "external_link": "https://0x11ED534377360a612824FA463977c8C3D269287C_11155111.nfts2.me/",
+    "seller_fee_basis_points": 750,
+    "fee_recipient": "0x11ED534377360a612824FA463977c8C3D269287C"
+}
