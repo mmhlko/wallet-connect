@@ -1,6 +1,5 @@
 import { classNames } from "@/shared/lib/helpers/classNames"
 import { useAppKit } from "@reown/appkit/react"
-import { useTonConnectUI } from "@tonconnect/ui-react"
 import { FC, useState } from "react"
 import { ConnectorNames } from "../../lib/config/wallet"
 import { WalletConfigV2 } from "../../types/walletConnect"
@@ -18,13 +17,13 @@ export const WalletSelector: FC<TWalletSelectProps> = ({
     const [showMore, setShowMore] = useState(false)
     const walletDisplayCount = wallets.length > displayCount ? displayCount - 1 : displayCount
     const walletsToShow = showMore ? wallets : wallets.slice(0, walletDisplayCount)
-    const [ tonConnectUI ] = useTonConnectUI();
+    //const [ tonConnectUI ] = useTonConnectUI();
     const { open } = useAppKit();
     const isTelegramWebApp = isTelegramWebAppFn()
     return (
         <div className="flex flex-col gap-4">
-            <button className="w-full bg-blue-500 h-[50px] rounded-2xl relative active:top-[1px]" onClick={() => { tonConnectUI.openModal() }}>TON Connect</button>
-            <button className="w-full bg-blue-500 h-[50px] rounded-2xl relative active:top-[1px]" onClick={() => { open() }}>Wallet Connect</button>
+{/*             <button className="w-full bg-blue-500 h-[50px] rounded-2xl relative active:top-[1px]" onClick={() => { tonConnectUI.openModal() }}>TON Connect</button>
+ */}            <button className="w-full bg-blue-500 h-[50px] rounded-2xl relative active:top-[1px]" onClick={() => { open() }}>Wallet Connect</button>
             <div className="grid grid-cols-4 place-items-center">
             {!isTelegramWebApp && walletsToShow.map((wallet) => {
                 const isImage = typeof wallet.icon === 'string'

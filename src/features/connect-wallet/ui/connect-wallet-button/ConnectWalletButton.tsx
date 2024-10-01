@@ -5,7 +5,7 @@ import { bsc } from "viem/chains";
 import { ConnectWalletModal } from "../connect-wallet-modal/ConnectWalletModal";
 import { createWallets } from "../../lib/config/wallet";
 import useAuth from "../../lib/hooks/useAuth";
-import { useTonConnectUI } from "@tonconnect/ui-react";
+//import { useTonConnectUI } from "@tonconnect/ui-react";
 import { shortenedAddress } from "@/shared/lib/helpers/shortenAddress";
 import { classNames } from "@/shared/lib/helpers/classNames";
 
@@ -21,7 +21,7 @@ export const ConnectWalletButton: FC<TConnectWalletButtonProps> = ({ children })
     const [walletAddress, setWalletAddress] = useState<string>()
     const { chainId, isConnected, address, isConnecting } = useAccount();
     //const [isAuthChecking, setIsAuthChecking] = useState(false);
-    const [tonConnectUI] = useTonConnectUI();
+    //const [tonConnectUI] = useTonConnectUI();
     const { connectAsync } = useConnect();
     const { login } = useAuth();
     const { disconnectAsync, isPending: isDisconnecting } = useDisconnect()
@@ -50,18 +50,18 @@ export const ConnectWalletButton: FC<TConnectWalletButtonProps> = ({ children })
         if (isConnected) {
             await disconnectAsync()
         }
-        if (tonConnectUI?.connected) {
-            await tonConnectUI.disconnect()
-        }
+        // if (tonConnectUI?.connected) {
+        //     await tonConnectUI.disconnect()
+        // }
         setOpenWallet(false)
     }
 
     const authCheck = useCallback(
         () => {
             const interval = setInterval(() => {
-                console.log("authCheck", isConnected, tonConnectUI?.connected);
-                const isWalletConnected = isConnected || tonConnectUI?.connected
-                const walletAddress = address || tonConnectUI?.wallet?.account?.address
+                //console.log("authCheck", isConnected, tonConnectUI?.connected);
+                const isWalletConnected = isConnected /* || tonConnectUI?.connected */
+                const walletAddress = address /* || tonConnectUI?.wallet?.account?.address */
                 setIsWalletConnected(isWalletConnected)
                 setWalletAddress(walletAddress)
                 if (isWalletConnected && walletAddress) {
@@ -72,7 +72,7 @@ export const ConnectWalletButton: FC<TConnectWalletButtonProps> = ({ children })
             return () => {
                 clearInterval(interval)
             }
-        }, [address, isConnected, tonConnectUI?.connected, tonConnectUI?.wallet?.account?.address]
+        }, [address, isConnected/* , tonConnectUI?.connected, tonConnectUI?.wallet?.account?.address */]
     )
 
     useEffect(() => {
