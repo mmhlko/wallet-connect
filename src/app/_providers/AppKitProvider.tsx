@@ -2,7 +2,7 @@
 import { createAppKit } from '@reown/appkit/react'
 
 import { CreateConnectorFn, WagmiProvider } from 'wagmi'
-import { binanceSmartChain, mainnet } from '@reown/appkit/networks'
+import { base, binanceSmartChain, mainnet, polygon } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { ReactNode } from 'react'
@@ -33,7 +33,7 @@ const metadata = {
 //   })
 // )
 
-export const networks = [mainnet, binanceSmartChain]
+export const networks = [mainnet, binanceSmartChain, polygon, base]
 
 // 3. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
