@@ -122,7 +122,7 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
                 <CustomButton color="orange" styleType="card" onClick={handleOpenModal}>Create NFT</CustomButton>
 
             </div>
-            <ModalMobile title="modal" isOpen={openModal} onClose={handleCloseModal}>
+            <ModalMobile title="Create NFT" isOpen={openModal} onClose={handleCloseModal}>
                 <div className="relative transition duration-150 ease-in-out delay-150">
                     {nftData && fee !== undefined && (
                         <div className="flex flex-col">

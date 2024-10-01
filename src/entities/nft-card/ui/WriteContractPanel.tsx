@@ -7,6 +7,7 @@ import { TReadContractData } from "@/shared/types/wagmi"
 import { feeTokenAddress } from "@/shared/constants/nft"
 import { parseEther, parseGwei } from "viem"
 import { CustomButton } from "@/shared/ui/CustomButton"
+import { MintForm } from "@/features/mint-nft"
 
 type TWriteContractPanelProps = {
     config: UseSimulateContractParameters,
@@ -119,8 +120,10 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
         },
     })
 
-    const handleClickMint = () => {
-        setAmountValue(BigInt(1))
+    const handleClickMint = (values: { inputValue: number }) => {
+        console.log(222, values);
+        
+        //setAmountValue(BigInt(1))
     }
 
     useEffect(() => {
@@ -143,7 +146,9 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
 
     return (
         <>
-            <CustomButton color="orange" styleType="card" onClick={handleClickMint}>{formProps?.buttonTitle}</CustomButton>
+            <MintForm onSubmit={handleClickMint} disabled={false}/>
         </>
     )
 }
+
+//<CustomButton color="orange" styleType="card" onClick={handleClickMint}>{formProps?.buttonTitle}</CustomButton>
