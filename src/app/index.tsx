@@ -16,7 +16,7 @@ export const App: FC<{
                 balance="show"
                 loadingLabel="Connecting..." 
               />
-              <ConnectWalletButton>Connect</ConnectWalletButton>
+              {/* <ConnectWalletButton>Connect</ConnectWalletButton> */}
             </div>
           </div>
         </header>
