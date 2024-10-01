@@ -10,6 +10,7 @@ import { erc20Abi } from "viem"
 import { feeTokenAddress, feeTokenDecimals } from "@/shared/constants/nft"
 import { setFeePrice } from "../helpers"
 import { classNames } from "@/shared/lib/helpers/classNames"
+import { ModalMobile } from "@/shared/ui/ModalMobile"
 
 type TNftCardProps = {
     cost?: number
@@ -45,7 +46,7 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
         if (nftData) {
 
             setLoading(true)
-            const res = await fetch(nftData[0].result as string, { headers: { "X-Master-Key": "66fb73d3ad19ca34f8b0b5fa"}})
+            const res = await fetch(nftData[0].result as string, { headers: { "X-Master-Key": "66fb73d3ad19ca34f8b0b5fa" } })
             const tokenUri: TNftMetadata = await res.json().then(data => data.record || data)
             console.log(222, tokenUri);
             setTokenUri(tokenUri);
@@ -56,8 +57,6 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
     }
 
     useEffect(() => {
-        console.log(nftData);
-        
         nftData && getNftData()
     }, [nftData])
 
@@ -76,10 +75,11 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
                 )
         )
     }
-console.log(111, tokenUri);
+    console.log(111, tokenUri);
 
     return (
-        <div className={classNames(
+        <>
+            <div className={classNames(
             "flex flex-col rounded-[20px] lg:rounded-[16px] gap-[20px] overflow-hidden h-full",
             isCollection
                 ? "bg-foreground p-5 xl:p-[30px] w-full"
@@ -97,50 +97,46 @@ console.log(111, tokenUri);
                 </div>
             </div>
             <div className="flex justify-between items-center">
-            <h2 className="text-background text-2xl">{name}</h2>
-            {isCollection && fee !== undefined && (
-                <p className="text-base text-background">
-                    {fee && <span className="text-base xl:text-[40px]">{"$ "}</span>}
-                    {setFeePrice(fee, feeTokenDecimals)}
-                </p>
-            )}
+                <h2 className="text-background text-2xl">{name}</h2>
+                {isCollection && fee !== undefined && (
+                    <p className="text-base text-background">
+                        {fee && <span className="text-base xl:text-[40px]">{"$ "}</span>}
+                        {setFeePrice(fee, feeTokenDecimals)}
+                    </p>
+                )}
             </div>
-            {isCollection && (isConnected
-                ? (
-                    <div className="relative transition duration-150 ease-in-out delay-150">
-                        {nftData && fee !== undefined && (
-                            <div className="flex flex-col">
-                                <WriteContractPanel
-                                    config={{
-                                        abi: abi.nftContract,
-                                        functionName: ENftWriteFunctionNames.mintBatch,
-                                        address: contractAddress,
-                                        query: {
-                                            retry: 0,
-                                            refetchOnWindowFocus: false,
-                                        },
-                                        chainId: chainId
-                                    }}
-                                    approveConfig={{
-                                        abi: erc20Abi,
-                                        functionName: ENftWriteFunctionNames.approve,
-                                        address: feeTokenAddress,
-                                        chainId: chainId
-                                    }}
-                                    formProps={{
-                                        buttonTitle: "mint now",
-                                    }}
-                                />
-                            </div>
-                        )}
-                        <div className="mt-[30px] max-w-[384px] flex-1">
-                            <p className="text-[#999] text-center text-sm lg:text-start xl:text-base">{tokenUri?.description}</p>
-                        </div>
+            <div className="relative transition duration-150 ease-in-out delay-150">
+                {nftData && fee !== undefined && (
+                    <div className="flex flex-col">
+                        <WriteContractPanel
+                            config={{
+                                abi: abi.nftContract,
+                                functionName: ENftWriteFunctionNames.mintBatch,
+                                address: contractAddress,
+                                query: {
+                                    retry: 0,
+                                    refetchOnWindowFocus: false,
+                                },
+                                chainId: chainId
+                            }}
+                            approveConfig={{
+                                abi: erc20Abi,
+                                functionName: ENftWriteFunctionNames.approve,
+                                address: feeTokenAddress,
+                                chainId: chainId
+                            }}
+                            formProps={{
+                                buttonTitle: "mint now",
+                            }}
+                        />
                     </div>
-                )
-                : (
-                    <w3m-button />
-                ))}
+                )}
+                <div className="mt-[30px] max-w-[384px] flex-1">
+                    <p className="text-[#999] text-center text-sm lg:text-start xl:text-base">{tokenUri?.description}</p>
+                </div>
+            </div>
         </div>
+        <ModalMobile title="modal" isOpen={false} onClose={() => {}}>modal</ModalMobile>
+        </>
     )
 }

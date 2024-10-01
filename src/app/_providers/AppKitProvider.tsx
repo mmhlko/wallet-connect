@@ -1,12 +1,11 @@
 'use client'
 import { createAppKit } from '@reown/appkit/react'
 
-import { CreateConnectorFn, State, WagmiProvider } from 'wagmi'
-import { base, binanceSmartChain, mainnet, polygon } from '@reown/appkit/networks'
+import { CreateConnectorFn, WagmiProvider } from 'wagmi'
+import { binanceSmartChain, mainnet } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { ReactNode } from 'react'
-import { coinbaseWallet, injected, walletConnect } from 'wagmi/connectors'
 import { createWagmiConfig, MetaMaxConnect } from '../../features/connect-wallet/lib/config/wc'
 
 // 0. Setup queryClient
@@ -33,7 +32,7 @@ const metadata = {
 //   })
 // )
 
-export const networks = [mainnet, polygon, base]
+export const networks = [mainnet, binanceSmartChain]
 
 // 3. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
@@ -49,7 +48,6 @@ const wagmiAdapter = new WagmiAdapter({
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
-  defaultNetwork: base,
   metadata,
   projectId,
   features: {
@@ -65,11 +63,11 @@ createAppKit({
   ],
 })
 
-export const wagmiConfig2= createWagmiConfig()
+const wagmiConfig2= createWagmiConfig()
 
-export function AppKitProvider({ children, initialState }: { children:ReactNode, initialState?: State }) {
+export function AppKitProvider({ children }: { children:ReactNode }) {
   return (
-    <WagmiProvider config={wagmiConfig2} initialState={initialState}>
+    <WagmiProvider config={wagmiConfig2}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
