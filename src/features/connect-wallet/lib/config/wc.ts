@@ -1,4 +1,4 @@
-import { bsc, mainnet, polygon } from "viem/chains"
+import { base, bsc, mainnet, polygon } from "viem/chains"
 import { createConfig, createConnector, http } from "wagmi"
 import { injected, walletConnect } from "wagmi/connectors"
 import { CLIENT_CONFIG } from "./viem"
@@ -124,13 +124,14 @@ export const injectedConnector = injected({ shimDisconnect: false })
 
 export function createWagmiConfig() {
     return createConfig({
-      chains: [bsc, polygon, mainnet],
+      chains: [bsc, polygon, mainnet, base],
       ssr: true,
       syncConnectedChain: true,
       transports: {
         [mainnet.id]: http(),
         [polygon.id]: http(),
         [bsc.id]: http(),
+        [base.id]: http(),
       },
       ...CLIENT_CONFIG,
   

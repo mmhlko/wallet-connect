@@ -1,0 +1,1 @@
+export { NftCard } from "./ui/NftCard";
