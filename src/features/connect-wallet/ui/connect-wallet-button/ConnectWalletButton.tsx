@@ -35,9 +35,6 @@ export const ConnectWalletButton:FC<TConnectWalletButtonProps> = ({ children }) 
             >
                 {children}
             </button>
-            {isWalletConnected && walletAddress && (
-                <h2>{walletAddress.slice(-4)}</h2>
-            )}
             <ConnectWalletModal
                 isOpen={openModal}
                 wallets={wallets}
