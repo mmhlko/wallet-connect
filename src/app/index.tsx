@@ -12,6 +12,7 @@ export const App: FC<{
           <div className="flex justify-end px-4">
             <div><ConnectWalletButton>Connect Wallet</ConnectWalletButton></div>
           </div>
+          <span>work_1</span>
         </header>
         <main>
           {children}
