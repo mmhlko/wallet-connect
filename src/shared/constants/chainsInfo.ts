@@ -11,3 +11,11 @@ export const chainsInfo = {
 }
 
 export type TChainNames = keyof typeof chainsInfo;
+
+
+export const scanInfo = {
+    base: {
+        url: "https://api.basescan.org/api",
+        apiKey: "MVJJWENBWUZDZEV5DDJPVWKIY84S9Q78GA"
+    }
+}
