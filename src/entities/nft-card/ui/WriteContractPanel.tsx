@@ -8,6 +8,9 @@ import { feeTokenAddress } from "@/shared/constants/nft"
 import { parseEther, parseGwei } from "viem"
 import { CustomButton } from "@/shared/ui/CustomButton"
 import { MintForm } from "@/features/mint-nft"
+import { TNftFormValues } from "@/features/mint-nft/types"
+import { setNftUri } from "@/features/mint-nft/lib/helpers"
+import { uriApi } from "@/app/_api/servises/uriApi"
 
 type TWriteContractPanelProps = {
     config: UseSimulateContractParameters,
@@ -120,8 +123,9 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
         },
     })
 
-    const handleClickMint = (values: { inputValue: number }) => {
-        console.log(222, values);
+    const handleClickMint = async (values: TNftFormValues) => {
+        const uri = await uriApi.uploadUri(setNftUri({...values, image: values.image[0]}))
+        console.log(333, uri);
         
         //setAmountValue(BigInt(1))
     }

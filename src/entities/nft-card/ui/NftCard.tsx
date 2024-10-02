@@ -43,7 +43,6 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
         chainId
     }))
     const { data: nftData, error, status } = useReadContracts({ contracts }) as TNftReadContractsData
-    console.log(555, nftData);
 
     const getNftData = async () => {
         if (nftData) {
@@ -86,7 +85,6 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
                 )
         )
     }
-    console.log(111, tokenUri);
 
     return (
         <>

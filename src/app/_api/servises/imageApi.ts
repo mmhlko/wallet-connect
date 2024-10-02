@@ -29,13 +29,10 @@ export class ImageService {
     public uploadImage = async (formData: FormData, config?: AxiosRequestConfig<any>) => {
 
         try {
-            const response = await axios.post<TImageApiResponse>(apiRoutes.imageApi.baseRoute, formData, {
+            const response = await api.post<TImageApiResponse>(apiRoutes.imageApi.baseRoute, formData, {
                 ...config,
                 params: {
                     api_key: "LwUdjcSsfIexgLfhA5VNOENNqev2jT5p"
-                },
-                headers: {
-                    'Content-Type': 'multipart/form-data',
                 }
             })
 

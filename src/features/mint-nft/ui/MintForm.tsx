@@ -23,8 +23,8 @@ export const MintForm: FC<TMintFormProps> = ({ onSubmit, disabled }) => {
                 <Input placeholder={"Enter your NFT name description"} disabled={false} />
             </Form.Item>
             <ImageFormItem
-                name="logo"
-                label="Logo"
+                name="image"
+                label="Image"
                 handleFormChange={handleFormChange}
             />
             <Button htmlType="submit" type="primary" disabled={!isFormChanged}>Submit</Button>

@@ -11,6 +11,9 @@ export const apiRoutes = {
 	},
 	imageApi: {
 		baseRoute: "/api/upload",
+	},
+	nftItemApi: {
+		baseRoute: "/api/uri",
 	}
 }
 

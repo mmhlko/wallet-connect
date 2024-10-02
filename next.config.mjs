@@ -11,6 +11,10 @@ const nextConfig = {
           destination: "https://www.imghippo.com/v1/upload",
         },
         {
+          source: "/api/uri",
+          destination: "https://api.jsonbin.io/v3/b",
+        },
+        {
           source: "/api/:path*",
           destination: `${API_URL}/:path*`,
           basePath: false,
