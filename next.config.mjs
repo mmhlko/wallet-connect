@@ -1,4 +1,3 @@
-const API_URL = process.env.API_URL;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: false,
@@ -14,12 +13,6 @@ const nextConfig = {
           source: "/api/uri",
           destination: "https://api.jsonbin.io/v3/b",
         },
-        {
-          source: "/api/:path*",
-          destination: `${API_URL}/:path*`,
-          basePath: false,
-        },
-
       ];
     },
     images: {
