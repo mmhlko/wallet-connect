@@ -11,6 +11,7 @@ import { MintForm } from "@/features/mint-nft"
 import { TNftFormValues } from "@/features/mint-nft/types"
 import { setNftUri } from "@/features/mint-nft/lib/helpers"
 import { uriApi } from "@/app/_api/servises/uriApi"
+import { Button, message } from "antd"
 
 type TWriteContractPanelProps = {
     config: UseSimulateContractParameters,
@@ -34,6 +35,9 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
     const [isSuccess, setIsSuccess] = useState(false)
     const [isWarning, setIsWarning] = useState(false)
     const [isError, setIsError] = useState(false)
+    const {isConnected} = useAccount()
+
+    const [messageApi, contextHolder] = message.useMessage();
 
     const resetModalStates = () => {
         setIsSuccess(false)
@@ -48,23 +52,31 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
         setOpenModal(true)
         setModalText("insufficient USDC balance")
         setAmountValue(undefined)
+        message.warning("insufficient USDC balance")
     }
     const setModalProcessing = () => {
         resetModalStates()
         setIsLoading(true)
         setOpenModal(true)
+        messageApi.open({
+            type: 'loading',
+            content: 'Open your wallet app to continue',
+            duration: 10,
+        });
     }
 
     const setModalError = () => {
         resetModalStates()
         setIsError(true)
         setOpenModal(true)
+        message.error("error")
     }
 
     const setModalSuccess = () => {
         resetModalStates()
         setIsSuccess(true)
         setOpenModal(true)
+        message.success("success")
     }
 
     const handleCloseModal = () => setOpenModal(false)
@@ -124,10 +136,18 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
     })
 
     const handleClickMint = async (values: TNftFormValues) => {
-        const uri = await uriApi.uploadUri(setNftUri({...values, image: values.image[0]}))
+        const uri = await uriApi.uploadUri(setNftUri({ ...values, image: values.image[0] }))
         console.log(333, uri);
-        
+
         //setAmountValue(BigInt(1))
+    }
+
+    const handleMint = async () => {
+        setAmountValue(BigInt(1))
+    }
+
+    const setMessage = () => {
+        
     }
 
     useEffect(() => {
@@ -150,7 +170,9 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
 
     return (
         <>
-            <MintForm onSubmit={handleClickMint} disabled={false}/>
+            {/* <MintForm onSubmit={handleClickMint} disabled={false} /> */}
+            <Button type="primary" loading={isLoading} onClick={handleMint} disabled={!isConnected}>{formProps?.buttonTitle}</Button>
+            {contextHolder}
         </>
     )
 }

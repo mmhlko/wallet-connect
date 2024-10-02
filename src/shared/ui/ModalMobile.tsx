@@ -32,7 +32,7 @@ export const ModalMobile: FC<TModalMobileProps> = ({ isOpen, onClose, title, chi
                     isOpen ? "translate-y-0" : "translate-y-full",
                     "fixed bottom-0 left-0 right-0 z-10",
                     "bg-foreground",
-                    "rounded-t-3xl pt-4 px-5",
+                    "rounded-t-3xl py-4 px-5",
                     "transition-all duration-200 ease-in",
                 )}
                 onClick={handleClickModal}
