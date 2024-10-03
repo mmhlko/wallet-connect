@@ -91,7 +91,7 @@ export function MetaMaxConnect() {
 
             if (type === 'display_uri') {
                 //config.emitter.emit('message', { type, data })
-                window.Telegram.WebApp.openLink(`https://metamask.app.link/wc?uri=${(data as string)}`)
+                window.Telegram.WebApp.openLink(`https://metamask.app.link/${(data as string)}`)
                 //window.Telegram.WebApp.openLink(`https://metamask.app.link/wc?uri=${encodeURIComponent(data as string)}`)
 
                 //window.location.href = (`metamask://wc?uri=${data}`)
