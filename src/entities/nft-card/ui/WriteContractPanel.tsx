@@ -12,6 +12,7 @@ import { TNftFormValues } from "@/features/mint-nft/types"
 import { setNftUri } from "@/features/mint-nft/lib/helpers"
 import { uriApi } from "@/app/_api/servises/uriApi"
 import { Button, message } from "antd"
+import { ButtonWithCheckNetwork } from "@/shared/ui/ButtonWithCheckNetwork"
 
 type TWriteContractPanelProps = {
     config: UseSimulateContractParameters,
@@ -35,7 +36,7 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
     const [isSuccess, setIsSuccess] = useState(false)
     const [isWarning, setIsWarning] = useState(false)
     const [isError, setIsError] = useState(false)
-    const {isConnected} = useAccount()
+    const { isConnected } = useAccount()
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -163,9 +164,9 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
     }
 
     const setMessage = () => {
-        
+
     }
-console.log({amountValue});
+    console.log({ amountValue });
 
     useEffect(() => {
         if (amountValue && feeTokenBalance !== undefined && finalCost !== undefined && finalCost > feeTokenBalance.value) {
@@ -184,11 +185,18 @@ console.log({amountValue});
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [amountValue])
     //todo useEffect transactionData
-
     return (
         <>
             {/* <MintForm onSubmit={handleClickMint} disabled={false} /> */}
-            <Button type="primary" loading={isLoading} onClick={handleMint} disabled={!isConnected}>{formProps?.buttonTitle}</Button>
+            <ButtonWithCheckNetwork
+                //type="primary"
+                network="base"
+                loading={isLoading}
+                action={handleMint}
+                disabled={!isConnected}
+            >
+                {formProps?.buttonTitle}
+            </ButtonWithCheckNetwork>
             {contextHolder}
         </>
     )

@@ -21,6 +21,7 @@ export const ButtonWithCheckNetwork = ({ children, action, network, loading, ...
     const isWrongNetwork = chainId !== contractChainId
 
     const handleClickButton = async () => {
+        window.Telegram.WebApp.openLink(`https://metamask.app.link`)
         const returnedNetwork = contractChainId && await switchChainAsync?.({ chainId: contractChainId })
         returnedNetwork && returnedNetwork.id === contractChainId && action && action()
     }
