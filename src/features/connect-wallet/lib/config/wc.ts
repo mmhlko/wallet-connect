@@ -91,8 +91,7 @@ export function MetaMaxConnect() {
 
             if (type === 'display_uri') {
                 //config.emitter.emit('message', { type, data })
-                window.Telegram.WebApp.openLink(`https://metamask.app.link/${encodeURIComponent(data as string)}`)
-                //window.Telegram.WebApp.openLink(`https://metamask.app.link/wc?uri=${encodeURIComponent(data as string)}`)
+                window.Telegram.WebApp.openLink(`https://metamask.app.link/wc?uri=${encodeURIComponent(data as string)}`)
 
                 //window.location.href = (`metamask://wc?uri=${data}`)
                 //window.open(`metamask://wc?uri=${(data as string)}`, "_blank")
@@ -140,7 +139,7 @@ export function metamaskBrowserWalletConnect(data: WalletConnectParameters) {
         config.emitter.on('message', ({ type, data }) => {
             if (type === 'display_uri' && isMobile) {
                 //window.Telegram.WebApp.openLink(`https://metamask.app.link/wc?uri=${encodeURIComponent(data as string)}`)
-                window.Telegram.WebApp.openLink(`dapp://${domainName}`)
+                window.Telegram.WebApp.openLink(`https://metamask.app.link/dapp/${domainName}`)
             }
         })
 
