@@ -1,12 +1,13 @@
 'use client'
 import { createAppKit } from '@reown/appkit/react'
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 
 import { Config, cookieToInitialState, CreateConnectorFn, WagmiProvider } from 'wagmi'
 import { base, binanceSmartChain, mainnet, polygon } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { ReactNode } from 'react'
-import { injectedConnector, metadata, metaMaskConnector, MetaMaxConnect, walletConnectNoQrCodeConnector } from '../../features/connect-wallet/lib/config/wc'
+import { injectedConnector, metadata, metamaskBrowserWalletConnect, metaMaskConnector, MetaMaxConnect, walletConnectNoQrCodeConnector } from '../../features/connect-wallet/lib/config/wc'
+import { WalletConnectParameters } from 'wagmi/connectors'
 
 // 0. Setup queryClient
 const queryClient = new QueryClient()
@@ -24,6 +25,12 @@ const projectId = 'c6281576f0219712a95548a00016466d'
 //   })
 // )
 
+const walletConnectParams: WalletConnectParameters = {
+  projectId,
+  metadata,
+  showQrModal: false,
+}
+
 export const networks = [mainnet, binanceSmartChain, polygon, base]
 
 // 3. Create Wagmi Adapter
@@ -34,9 +41,10 @@ const wagmiAdapter = new WagmiAdapter({
   syncConnectedChain: true,
   connectors: [
     MetaMaxConnect(),
-    metaMaskConnector,
+    //metaMaskConnector,
     injectedConnector,
-    walletConnectNoQrCodeConnector
+    walletConnectNoQrCodeConnector,
+    metamaskBrowserWalletConnect(walletConnectParams)
   ]
 })
 
@@ -44,6 +52,8 @@ const wagmiAdapter = new WagmiAdapter({
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
+  defaultNetwork: base,
+  allowUnsupportedChain: true,
   metadata,
   projectId,
   features: {
@@ -57,6 +67,7 @@ createAppKit({
   featuredWalletIds: [
     "c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96"
   ],
+  allWallets: 'HIDE'
 })
 
 //const wagmiConfig2= createWagmiConfig()

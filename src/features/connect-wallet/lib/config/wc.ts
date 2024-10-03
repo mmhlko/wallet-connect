@@ -1,9 +1,11 @@
 import { base, bsc, mainnet, polygon } from "viem/chains"
 import { createConfig, createConnector, http } from "wagmi"
-import { injected, walletConnect } from "wagmi/connectors"
+import { injected, walletConnect, WalletConnectParameters } from "wagmi/connectors"
 import { CLIENT_CONFIG } from "./viem"
 
 export const projectId = "c6281576f0219712a95548a00016466d"
+const domainName = process.env.NEXT_PUBLIC_DOMAIN_NAME
+
 
 // 2. Create a metadata object - optional
 export const metadata = {
@@ -130,6 +132,25 @@ export const walletConnectNoQrCodeConnector = walletConnect({
 export const metaMaskConnector = injected({ target: 'metaMask', shimDisconnect: false })
 export const trustConnector = injected({ target: 'trust', shimDisconnect: false })
 export const injectedConnector = injected({ shimDisconnect: false })
+
+export function metamaskBrowserWalletConnect(data: WalletConnectParameters) {
+    return createConnector((config) => {
+        const wc = walletConnect(data)(config)
+        config.emitter.on('message', ({ type, data }) => {
+            if (type === 'display_uri' && isMobile) {
+                window.location.href = (`dapp://${domainName}`)
+            }
+        })
+
+        return {
+            ...wc,
+            id: 'metamaskBrowserWalletConnect',
+            type: 'metamaskBrowserWalletConnect',
+            name: 'MetaMask Browser',
+            icon: 'https://app.uniswap.org/static/media/metamask-icon.c8b2298e68e585a7f4d9c7b7e6320715.svg',
+        }
+    })
+}
 
 export function createWagmiConfig() {
     return createConfig({
