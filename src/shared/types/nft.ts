@@ -30,7 +30,7 @@ export interface NftTransaction {
     confirmations: string;        // Количество подтверждений транзакции
 }
 
-export interface NftItem {
+export interface TNftCardItem {
     contractAddress: TAddress;      // Адрес контракта токена (NFT)
     tokenID: string;              // Идентификатор токена NFT
     tokenName: string;            // Имя токена (NFT)

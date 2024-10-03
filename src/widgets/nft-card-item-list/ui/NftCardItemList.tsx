@@ -4,7 +4,7 @@ import { base } from "viem/chains";
 import { useAccount } from "wagmi";
 import { TAddress } from "@/shared/types";
 import { NftCard } from "@/entities/nft-card";
-import { NftItem, NftTransaction } from "@/shared/types/nft";
+import { TNftCardItem, NftTransaction } from "@/shared/types/nft";
 import { nftList } from "@/shared/constants/nft";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -18,6 +18,7 @@ import { scanInfo } from "@/shared/constants/chainsInfo";
 import { classNames } from "@/shared/lib/helpers/classNames";
 import { filterNftTransactions } from "@/shared/lib/helpers/filterNftTransactions";
 import CardItemSkeleton from "@/shared/ui/CardItemSkeleton";
+import { NftCardItem } from "@/entities/nft-item/ui/NftItem";
 
 const ErrorTitle = ({ children }: { children: ReactNode }) => (
     <h2 className="text-[#9F9F9F] text-[40px] text-center font-bold">
@@ -31,7 +32,7 @@ const filterTransactionsByAddress = (transaction: NftTransaction) => (
 
 export const NftCardItemList = () => {
     const { nftCount } = useCounterStore((state) => state)
-    const [nftItems, setNftItems] = useState<NftItem[]>([]);
+    const [nftItems, setNftItems] = useState<TNftCardItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [isFetched, setIsFetched] = useState(false)
     const [error, setError] = useState<string | null>(null);
@@ -142,7 +143,7 @@ export const NftCardItemList = () => {
                 ))}
                 {isFetched && nftItems.map((transaction, index) => (
                     <SwiperSlide key={transaction.contractAddress + transaction.tokenID} virtualIndex={index} className="px-[48px] sm:px-0">
-                        <NftCard contractAddress={transaction.contractAddress} chainId={base.id} type="token" nftItem={transaction} />
+                        <NftCardItem contractAddress={transaction.contractAddress} chainId={base.id} type="token" nftItem={transaction} />
                     </SwiperSlide>
                 ))}
                 {<SwiperSlide className={classNames(

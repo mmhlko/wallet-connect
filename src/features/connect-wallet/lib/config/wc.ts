@@ -138,7 +138,8 @@ export function metamaskBrowserWalletConnect(data: WalletConnectParameters) {
         const wc = walletConnect(data)(config)
         config.emitter.on('message', ({ type, data }) => {
             if (type === 'display_uri' && isMobile) {
-                window.location.href = (`dapp://${domainName}`)
+                //window.Telegram.WebApp.openLink(`https://metamask.app.link/wc?uri=${encodeURIComponent(data as string)}`)
+                window.Telegram.WebApp.openLink(`dapp://${domainName}`)
             }
         })
 
