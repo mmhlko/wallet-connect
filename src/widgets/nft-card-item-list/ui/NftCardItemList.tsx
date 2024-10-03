@@ -73,6 +73,8 @@ export const NftCardItemList = () => {
     }
 
     useEffect(() => {
+        console.log(33, walletAddress);
+        
         fetchNftTokenList(scanInfo.base.url, walletAddress, scanInfo.base.apiKey)
     }, [walletAddress])
 

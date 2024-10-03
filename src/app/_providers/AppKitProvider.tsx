@@ -1,7 +1,7 @@
 'use client'
 import { createAppKit } from '@reown/appkit/react'
 
-import { CreateConnectorFn, WagmiProvider } from 'wagmi'
+import { Config, cookieToInitialState, CreateConnectorFn, WagmiProvider } from 'wagmi'
 import { base, binanceSmartChain, mainnet, polygon } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
@@ -66,9 +66,10 @@ createAppKit({
 
 const wagmiConfig2= createWagmiConfig()
 
-export function AppKitProvider({ children }: { children:ReactNode }) {
+export function AppKitProvider({ children, cookies }: { children:ReactNode, cookies: string | null }) {
+  const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
   return (
-    <WagmiProvider config={wagmiConfig2}>
+    <WagmiProvider config={wagmiConfig2} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
