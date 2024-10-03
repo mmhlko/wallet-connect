@@ -85,69 +85,59 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
                 "flex flex-col rounded-[20px] lg:rounded-[16px] gap-[20px] overflow-hidden h-full",
                 "bg-foreground p-5 xl:p-[30px] w-full"
             )}>
-                {isCollection
-                    ? (<>
-                        <div className="flex justify-center max-h-[160px] pb-[40px]">
-                            <div className={classNames(
-                                "bg-transparent rounded-[16px] relative",
-                                isCollection ? "w-full lg:max-w-[300px] max-h-[280px] lg:max-h-[300px] aspect-square" : "w-full max-w-[330px] h-full max-h-[330px]",
-                            )}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={tokenUri?.image_url} alt="picture" className="rounded-[16px] select-none pointer-events-none w-full h-full object-cover" />
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={tokenUri?.image} alt="picture" className="absolute -bottom-[40px] left-[20px] max-w-[80px] max-h-[80px] rounded-[16px] select-none pointer-events-none w-full h-full object-cover border-4 shadow-md" />
+                <div className="flex justify-center max-h-[160px] pb-[40px]">
+                    <div className={classNames(
+                        "bg-transparent rounded-[16px] relative",
+                        isCollection ? "w-full lg:max-w-[300px] max-h-[280px] lg:max-h-[300px] aspect-square" : "w-full max-w-[330px] h-full max-h-[330px]",
+                    )}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={tokenUri?.image_url} alt="picture" className="rounded-[16px] select-none pointer-events-none w-full h-full object-cover" />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={tokenUri?.image} alt="picture" className="absolute -bottom-[40px] left-[20px] max-w-[80px] max-h-[80px] rounded-[16px] select-none pointer-events-none w-full h-full object-cover border-4 shadow-md" />
+                    </div>
+                </div>
+                {isCollection && <div className="flex justify-between items-center">
+                    <h2 className="text-background text-2xl">{name}</h2>
+                    {fee !== undefined && (
+                        <p className="text-base text-background">
+                            {fee && <span className="text-base xl:text-[40px]">{"$ "}</span>}
+                            {setFeePrice(fee, feeTokenDecimals)}
+                        </p>
+                    )}
+                </div>}
+                <div className="mt-[30px] max-w-[384px] flex-1">
+                    <p className="text-[#999] text-center text-sm lg:text-start xl:text-base">{tokenUri?.description}</p>
+                </div>
+                <CustomButton color="orange" styleType="card" onClick={handleOpenModal}>Create NFT</CustomButton>
+                <ModalMobile title="Create NFT" isOpen={openModal} onClose={handleCloseModal}>
+                    <div className="relative transition duration-150 ease-in-out delay-150">
+                        {nftData && fee !== undefined && (
+                            <div className="flex flex-col">
+                                <WriteContractPanel
+                                    config={{
+                                        abi: abi.nftContract,
+                                        functionName: ENftWriteFunctionNames.mintBatch,
+                                        address: contractAddress,
+                                        query: {
+                                            retry: 0,
+                                            refetchOnWindowFocus: false,
+                                        },
+                                        chainId: chainId
+                                    }}
+                                    approveConfig={{
+                                        abi: erc20Abi,
+                                        functionName: ENftWriteFunctionNames.approve,
+                                        address: feeTokenAddress,
+                                        chainId: chainId
+                                    }}
+                                    formProps={{
+                                        buttonTitle: "mint now",
+                                    }}
+                                />
                             </div>
-                        </div>
-                        {isCollection && <div className="flex justify-between items-center">
-                            <h2 className="text-background text-2xl">{name}</h2>
-                            {fee !== undefined && (
-                                <p className="text-base text-background">
-                                    {fee && <span className="text-base xl:text-[40px]">{"$ "}</span>}
-                                    {setFeePrice(fee, feeTokenDecimals)}
-                                </p>
-                            )}
-                        </div>}
-                        <div className="mt-[30px] max-w-[384px] flex-1">
-                            <p className="text-[#999] text-center text-sm lg:text-start xl:text-base">{tokenUri?.description}</p>
-                        </div>
-                        <CustomButton color="orange" styleType="card" onClick={handleOpenModal}>Create NFT</CustomButton>
-                        <ModalMobile title="Create NFT" isOpen={openModal} onClose={handleCloseModal}>
-                            <div className="relative transition duration-150 ease-in-out delay-150">
-                                {nftData && fee !== undefined && (
-                                    <div className="flex flex-col">
-                                        <WriteContractPanel
-                                            config={{
-                                                abi: abi.nftContract,
-                                                functionName: ENftWriteFunctionNames.mintBatch,
-                                                address: contractAddress,
-                                                query: {
-                                                    retry: 0,
-                                                    refetchOnWindowFocus: false,
-                                                },
-                                                chainId: chainId
-                                            }}
-                                            approveConfig={{
-                                                abi: erc20Abi,
-                                                functionName: ENftWriteFunctionNames.approve,
-                                                address: feeTokenAddress,
-                                                chainId: chainId
-                                            }}
-                                            formProps={{
-                                                buttonTitle: "mint now",
-                                            }}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </ModalMobile>
-                    </>)
-                    : (<>
-                        <div className="text-center select-none flex flex-col gap-4">
-                            <img src={tokenUri?.image} alt="picture" className="rounded-[16px] select-none pointer-events-none w-full h-full object-cover border-4 shadow-md" />
-                            <h2 className="text-xl font-bold text-black mb-2.5">{`${name} #${nftItem?.tokenID}`}</h2>
-                        </div>
-                    </>)
-                }
+                        )}
+                    </div>
+                </ModalMobile>
             </div>
 
         </>
