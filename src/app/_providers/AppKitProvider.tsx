@@ -6,22 +6,13 @@ import { base, binanceSmartChain, mainnet, polygon } from '@reown/appkit/network
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { ReactNode } from 'react'
-import { coinbaseWallet, injected, walletConnect } from 'wagmi/connectors'
-import { createWagmiConfig, MetaMaxConnect } from '../../features/connect-wallet/lib/config/wc'
+import { injectedConnector, metadata, metaMaskConnector, MetaMaxConnect, walletConnectNoQrCodeConnector } from '../../features/connect-wallet/lib/config/wc'
 
 // 0. Setup queryClient
 const queryClient = new QueryClient()
 
 // 1. Get projectId from https://cloud.reown.com
 const projectId = 'c6281576f0219712a95548a00016466d'
-
-// 2. Create a metadata object - optional
-const metadata = {
-  name: 'AppKit',
-  description: 'AppKit Example',
-  url: 'https://web3modal.com', // origin must match your domain & subdomain
-  icons: ['https://avatars.githubusercontent.com/u/179229932']
-}
 
 // const connectors: CreateConnectorFn[] = []
 // connectors.push(walletConnect({ projectId, metadata, showQrModal: false })) // showQrModal must be false
@@ -40,8 +31,12 @@ const wagmiAdapter = new WagmiAdapter({
   ssr: true,
   networks,
   projectId,
+  syncConnectedChain: true,
   connectors: [
-    MetaMaxConnect()
+    MetaMaxConnect(),
+    metaMaskConnector,
+    injectedConnector,
+    walletConnectNoQrCodeConnector
   ]
 })
 
@@ -64,12 +59,12 @@ createAppKit({
   ],
 })
 
-const wagmiConfig2= createWagmiConfig()
+//const wagmiConfig2= createWagmiConfig()
 
 export function AppKitProvider({ children, cookies }: { children:ReactNode, cookies: string | null }) {
   const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
   return (
-    <WagmiProvider config={wagmiConfig2} initialState={initialState}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )

@@ -5,6 +5,14 @@ import { CLIENT_CONFIG } from "./viem"
 
 export const projectId = "c6281576f0219712a95548a00016466d"
 
+// 2. Create a metadata object - optional
+export const metadata = {
+    name: 'AppKit',
+    description: 'AppKit Example',
+    url: 'https://web3modal.com', // origin must match your domain & subdomain
+    icons: ['https://avatars.githubusercontent.com/u/179229932']
+  }
+
 export const isMobile: boolean | undefined =
     typeof navigator !== 'undefined' ? /iPhone|iPad|iPod|Android|Mobi/i.test(navigator.userAgent) : undefined
 
@@ -117,7 +125,8 @@ export const walletConnectConnector = walletConnect({
 export const walletConnectNoQrCodeConnector = walletConnect({
     showQrModal: false,
     projectId,
-  })
+    metadata: metadata
+})
 export const metaMaskConnector = injected({ target: 'metaMask', shimDisconnect: false })
 export const trustConnector = injected({ target: 'trust', shimDisconnect: false })
 export const injectedConnector = injected({ shimDisconnect: false })
