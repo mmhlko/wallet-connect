@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <div className="container flex flex-col gap-10">
         <NftCollectionList />
-        <h3>My NFTs</h3>
+        <h3 className="text-center text-xl">My NFTs</h3>
         <NftCardItemList />
       </div>
     </>

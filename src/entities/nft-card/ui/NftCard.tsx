@@ -5,7 +5,7 @@ import { useAccount, useReadContracts, UseReadContractsReturnType } from "wagmi"
 import { ENftReadFunctionNames, ENftWriteFunctionNames, TNftReadContractsData, TReadContractsResult } from "@/shared/types/wagmi"
 import { WriteContractPanel } from "./WriteContractPanel"
 import { TAddress } from "@/shared/types"
-import { NftItem, NftTransaction, TNftMetadata } from "@/shared/types/nft"
+import { TNftCardItem, TNftMetadata } from "@/shared/types/nft"
 import { erc20Abi } from "viem"
 import { feeTokenAddress, feeTokenDecimals } from "@/shared/constants/nft"
 import { setFeePrice } from "../helpers"
@@ -19,7 +19,7 @@ type TNftCardProps = {
     contractAddress: TAddress,
     chainId?: number,
     type: "collection" | "token",
-    nftItem?: NftItem,
+    nftItem?: TNftCardItem,
     number?: number,
 }
 const methodList = [
@@ -73,17 +73,9 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
 
     if (loading) {
         return (
-            isCollection
-                ? (
-                    <div className="flex flex-col gap-[30px] rounded-[20px] lg:rounded-[16px] bg-dark-main overflow-hidden p-5 xl:p-[30px] w-full max-w-[352px] h-full">
-                        loading
-                    </div>
-                )
-                : (
-                    <div className="min-w-[370px] shrink-0">
-                        loading
-                    </div>
-                )
+            <div className="flex flex-col gap-[30px] rounded-[20px] lg:rounded-[16px] bg-dark-main overflow-hidden p-5 xl:p-[30px] w-full max-w-[352px] h-full">
+                loading
+            </div>
         )
     }
 
@@ -91,9 +83,7 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
         <>
             <div className={classNames(
                 "flex flex-col rounded-[20px] lg:rounded-[16px] gap-[20px] overflow-hidden h-full",
-                isCollection
-                    ? "bg-foreground p-5 xl:p-[30px] w-full"
-                    : "bg-white p-2.5 pb-[30px] w-full max-w-[300px] shrink-0 mx-auto",
+                "bg-foreground p-5 xl:p-[30px] w-full"
             )}>
                 {isCollection
                     ? (<>

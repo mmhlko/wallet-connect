@@ -74,8 +74,6 @@ export const NftCardItemList = () => {
     }
 
     useEffect(() => {
-        console.log(33, walletAddress);
-        
         fetchNftTokenList(scanInfo.base.url, walletAddress, scanInfo.base.apiKey)
     }, [walletAddress])
 
@@ -88,20 +86,29 @@ export const NftCardItemList = () => {
             <ErrorTitle>{"Wallet connected & you don't have any NFT yet"}</ErrorTitle>
         )
     }
-
-    console.log(777, nftItems);
-    
-
     return (
-        <div>
-            <Swiper
+        <div className="flex flex-col items-center gap-8">
+            {loading && nftItems.length === 0 && Array(5).fill(<></>).map((_, index) => (
+                <div key={index} className="w-full max-w-[200px]"><CardItemSkeleton /></div>
+            ))}
+            {isFetched && nftItems.map((transaction, index) => (
+                <NftCardItem key={transaction.contractAddress + transaction.tokenID} contractAddress={transaction.contractAddress} chainId={base.id} type="token" nftItem={transaction} />
+            ))}
+            {error && (
+                <ErrorTitle>{"NFT can not to be loaded"}</ErrorTitle>
+            )}
+        </div>
+    );
+}
+
+{/*             <Swiper
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 spaceBetween={40}
                 scrollbar={{ draggable: true }}
                 modules={[Navigation, Pagination]}
                 className="mb-[60px]"
                 mousewheel
-                /* centeredSlides={true} */
+                //centeredSlides={true}
                 grabCursor={true}
                 centerInsufficientSlides
                 navigation={{
@@ -153,29 +160,4 @@ export const NftCardItemList = () => {
                 )}>
                     <CardItemSkeleton />
                 </SwiperSlide>}
-            </Swiper>
-            <div className={classNames(
-                "hidden justify-center gap-[30px]",
-                isFetched && nftItems.length > 5 ? "sm:flex" : ""
-            )}>
-                {Array(2).fill(<></>).map((_, index) => (
-                    <button
-                        key={index}
-                        ref={index === 0 ? prevRef : nextRef}
-                        className={classNames(
-                            "flex justify-center items-center w-[80px] h-[80px] rounded-[20px] ",
-                            "bg-dark-main disabled:opacity-70 disabled:bg-dark-main",
-                            "hover:bg-orange-base ease-in-out duration-300",
-                            index === 1 ? "rotate-180" : "",
-                        )}
-                        aria-label={index === 0 ? "prev" : "next"}>
-                        {"<"}
-                    </button>
-                ))}
-            </div>
-            {error && (
-                <ErrorTitle>{"NFT can not to be loaded"}</ErrorTitle>
-            )}
-        </div>
-    );
-}
+            </Swiper> */}

@@ -6,6 +6,7 @@ import { ENftReadFunctionNames, TNftReadContractsData } from "@/shared/types/wag
 import { TAddress } from "@/shared/types"
 import { TNftCardItem, TNftMetadata } from "@/shared/types/nft"
 import { classNames } from "@/shared/lib/helpers/classNames"
+import CardItemSkeleton from "@/shared/ui/CardItemSkeleton"
 
 type TNftCardItemProps = {
     cost?: number
@@ -52,8 +53,8 @@ export const NftCardItem: FC<TNftCardItemProps> = ({ chainId, contractAddress, t
 
     if (loading) {
         return (
-            <div className="min-w-[370px] shrink-0">
-                loading
+            <div className="w-full max-w-[200px] shrink-0">
+                <CardItemSkeleton />
             </div>
         )
     }
@@ -62,7 +63,7 @@ export const NftCardItem: FC<TNftCardItemProps> = ({ chainId, contractAddress, t
         <>
             <div className={classNames(
                 "flex flex-col rounded-[20px] lg:rounded-[16px] gap-[20px] overflow-hidden h-full",
-                "bg-white p-2.5 pb-[30px] w-full max-w-[300px] shrink-0 mx-auto"
+                "bg-white p-2.5 pb-[30px] w-full max-w-[200px] shrink-0 mx-auto"
             )}>
                 <div className="text-center select-none flex flex-col gap-4">
                     <img src={tokenUri?.image} alt="picture" className="rounded-[16px] select-none pointer-events-none w-full h-full object-cover border-4 shadow-md" />

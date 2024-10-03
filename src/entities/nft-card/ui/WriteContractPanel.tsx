@@ -54,6 +54,18 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
         setAmountValue(undefined)
         message.warning("insufficient USDC balance")
     }
+
+    const SuccessMessage = () => {
+        const closeMessage = () => {
+            messageApi.destroy()
+        }
+        return (
+            <div className="flex flex-col items-center gap-1">
+                <span>Success</span>
+                <Button type="primary" onClick={closeMessage}>Ok</Button>
+            </div>
+        )
+    }
     const setModalProcessing = () => {
         resetModalStates()
         setIsLoading(true)
@@ -76,7 +88,11 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
         resetModalStates()
         setIsSuccess(true)
         setOpenModal(true)
-        message.success("success")
+        messageApi.open({
+            type: 'success',
+            content: <SuccessMessage />,
+            duration: 20,
+        });
     }
 
     const handleCloseModal = () => setOpenModal(false)
@@ -149,6 +165,7 @@ export const WriteContractPanel: FC<TWriteContractPanelProps> = ({ config, appro
     const setMessage = () => {
         
     }
+console.log({amountValue});
 
     useEffect(() => {
         if (amountValue && feeTokenBalance !== undefined && finalCost !== undefined && finalCost > feeTokenBalance.value) {
