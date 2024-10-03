@@ -91,7 +91,7 @@ export const NftCardItemList = () => {
             {loading && nftItems.length === 0 && Array(5).fill(<></>).map((_, index) => (
                 <div key={index} className="w-full max-w-[200px]"><CardItemSkeleton /></div>
             ))}
-            {isFetched && nftItems.map((transaction, index) => (
+            {isFetched && nftItems.reverse().map((transaction, index) => (
                 <NftCardItem key={transaction.contractAddress + transaction.tokenID} contractAddress={transaction.contractAddress} chainId={base.id} type="token" nftItem={transaction} />
             ))}
             {error && (

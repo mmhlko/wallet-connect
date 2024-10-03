@@ -52,7 +52,7 @@ const wagmiAdapter = new WagmiAdapter({
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
-  defaultNetwork: base,
+  defaultNetwork: mainnet,
   allowUnsupportedChain: true,
   metadata,
   projectId,
