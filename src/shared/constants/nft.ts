@@ -8,6 +8,10 @@ export const feeTokenDecimals = 6;
 export const nftList: TNftRenderList = [
     {
         address: "0x6Aa036a830BfeC4086b942f67bAfD7F82Cc5bD12", //Early Bird
+        chainId: base.id,
+    },
+    {
+        address: "0xc672ad51213B4FC61C98b437A15A6D024C81EBb9", //Defender Duck
         chainId: polygon.id,
     },
 ]
