@@ -45,23 +45,15 @@ export const NftCard: FC<TNftCardProps> = ({ chainId, contractAddress, type, nft
     }))
     const { data: nftData, error, status } = useReadContracts({ contracts }) as TNftReadContractsData
 
-
     const getNftData = async () => {
-        
-        
         if (nftData) {
-            
             setLoading(true)
             console.log(123, nftData);
-            
             try {
                 const res = await fetch(nftData[0].result as string, { headers: { "X-Master-Key": "66fb73d3ad19ca34f8b0b5fa" } })
                 const tokenUri: TNftMetadata = await res.json().then(data => data.record || data)
-                console.log(222, tokenUri);
                 setTokenUri(tokenUri);
-                
             } catch (error) {
-                
             }
             setName(nftData[1].result as string)
             setFee(nftData[2].result as bigint)
