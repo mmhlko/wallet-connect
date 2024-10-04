@@ -10,8 +10,8 @@ export default function Home() {
       <div className="container flex flex-col gap-10">
         <Chain />
         <NftCollectionList />
-{/*         <h3 className="text-center text-xl">My NFTs</h3>
-        <NftCardItemList /> */}
+        <h3 className="text-center text-xl">My NFTs</h3>
+        <NftCardItemList />
       </div>
     </>
   );
