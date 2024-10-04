@@ -4,8 +4,7 @@ import { NftCard } from "@/entities/nft-card/ui/NftCard";
 import { nftList } from "@/shared/constants/nft";
 
 export const NftCollectionList = () => {
-    console.log(nftList);
-    
+
     return (
         <div className="flex justify-center">
             {nftList.map((nft, index) => (

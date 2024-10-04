@@ -11,7 +11,7 @@ export const nftList: TNftRenderList = [
         chainId: base.id,
     }, */
     {
-        address: "0xc672ad51213B4FC61C98b437A15A6D024C81EBb9", //Defender Duck
+        address: "0xe1c7be9a91bb376acbb7c205f1f733a3468153b4", //Defender Duck
         chainId: polygon.id,
     },
 ]
