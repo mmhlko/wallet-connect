@@ -112,10 +112,10 @@ export function MetaMaxConnect() {
 
         return {
             ...wc,
-            id: 'metaMaxConnect',
-            type: 'metaMaxConnect',
-            name: 'Meta Max',
-            icon: 'https://app.uniswap.org/favicon.png',
+            id: 'metaMaskConnect',
+            type: 'metaMaskConnect',
+            name: 'MetaMask (iOS)',
+            icon: 'https://app.uniswap.org/static/media/metamask-icon.c8b2298e68e585a7f4d9c7b7e6320715.svg',
         }
     })
 }
