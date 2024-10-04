@@ -37,7 +37,7 @@ export const ButtonWithCheckNetwork = ({ children, action, network, loading, ...
             loading || switchLoading ? "pointer-events-none" : ""
         )} /* color="orange" styleType="card" */>
             {isWrongNetwork
-                ? `Switch${switchLoading ? "ing" : ""} on ${network}`
+                ? `Switch${switchLoading ? "ing" : ""} on ${network} and ${children}`
                 : children}
         </Button>
     )
