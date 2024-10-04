@@ -49,7 +49,7 @@ export const NftCardItem: FC<TNftCardItemProps> = ({ chainId, contractAddress, t
     }
 
     const handleCardClick = () => {
-        window.Telegram.WebApp.showPopup({message: "Share", title: "Share title", buttons: [{type: "close"}, {type: "ok"}]})
+        //window.Telegram.WebApp.showPopup({message: "Share", title: "Share title", buttons: [{type: "close"}, {type: "ok"}]})
     }
 
     useEffect(() => {
@@ -73,7 +73,7 @@ export const NftCardItem: FC<TNftCardItemProps> = ({ chainId, contractAddress, t
                 <div className="text-center select-none flex flex-col gap-4">
                     <img src={tokenUri?.image} alt="picture" className="rounded-[16px] select-none pointer-events-none w-full h-full object-cover border-4 shadow-md" />
                     <h2 className="text-xl font-bold text-black mb-2.5">{`${name} #${nftItem?.tokenID}`}</h2>
-                    <Button onClick={handleCardClick}>Share</Button>
+                    <a className="btn_telegram_share" href={`https://t.me/share/url?url=${"t.me/SmartFactoryTMA_Bot/app"}&text=Share NFT`}>Поделиться</a>
                 </div>
             </div>
 
